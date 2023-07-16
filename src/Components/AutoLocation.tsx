@@ -54,7 +54,7 @@ export const AutoLocation = ({
 }: AUtolocation) => {
   const [places, setPlace] = useState<any>({});
   const { ref, autocompleteRef } = usePlacesWidget({
-    apiKey: "AIzaSyAJF_iikMYBi314DCF3QSc1O2ebqG4ZbCQ",
+    apiKey: "",
     onPlaceSelected: (place) => setPlace(place),
     options: {
       types: ["(cities)"],
