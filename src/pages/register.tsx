@@ -15,6 +15,9 @@ import {
   useMediaQuery,
   
 } from '@chakra-ui/react';
+import correct from "../Assets/signUp/correct.png";
+import error from "../Assets/signUp/error.png";
+import empty from "../Assets/signUp/default.png";
 import Logo from "../Assets/logo.png";
 import office from "../Assets/office.png";
 import Select from 'react-select'
@@ -83,14 +86,14 @@ const getPlaces=(val)=>setPlaces(val)
  const numb = /[0-9]/;
  const {
     
-    bussAdd,
+    fullName,
     stateVal,
     country,
-    phn,
-    bussName,
-    bussType,
-    bussEmail,
-   
+   email,
+   company_name,
+    company_phone_num,
+    company_email,
+company_address,
     password
   } = state;
 
@@ -99,11 +102,16 @@ const getPlaces=(val)=>setPlaces(val)
         <Flex
           flexDir="column"
           width="100vw"
-          height="58rem"
+          height="78rem"
           background="#15616D"
         >
           {/* header */}
-          <Flex width="100%" height="100px" px="3rem">
+          <Flex
+            width="100%"
+            height="100px"
+            px={["6.5rem", "5.5rem", "4.5rem"]}
+            justifyContent="space-between"
+          >
             <Image
               src={Logo}
               alt="logo"
@@ -111,36 +119,74 @@ const getPlaces=(val)=>setPlaces(val)
               width="100px"
               height="100px"
             />
+            <Button
+              alignSelf="center"
+              fontWeight="700"
+              fontSize={
+                isSmallerThan900 ? "12px" : isSmallerThan1024 ? "15px" : "18px"
+              }
+              lineHeight={
+                isSmallerThan900 ? "15px" : isSmallerThan1024 ? "18px" : "22px"
+              }
+              color="primary.main"
+              onClick={() => navigate("/")}
+              _hover={{
+                textDecoration: "none",
+              }}
+            >
+              {" <- Back"}
+            </Button>
           </Flex>
 
           {/* Body */}
           <Flex
             width="100%"
-            height="calc(57.75rem-100px)"
+            height="calc(85.75rem-100px)"
             px="4rem"
-            justifyContent="space-between"
+            alignItems={
+              isSmallerThan740 ? "center" : isSmallerThan1024 ? "center" : ""
+            }
+            justifyContent={
+              isSmallerThan740
+                ? "center"
+                : isSmallerThan1024
+                ? "center"
+                : "space-between"
+            }
           >
-            <Flex width="40%" height="100%">
+            <Flex
+              width="50%"
+              height="100%"
+              display={
+                isSmallerThan740 ? "none" : isSmallerThan1024 ? "none" : "flex"
+              }
+            >
               <Image
                 alignSelf="flex-start"
                 justifySelf="center"
                 src={office}
                 alt="homebg"
                 objectFit="cover"
-                width="500px"
+                width={
+                  isSmallerThan740
+                    ? "200px"
+                    : isSmallerThan1024
+                    ? "400px"
+                    : "500px"
+                }
                 height="500px"
               />
             </Flex>
             {/* form wrapper */}
-            <Flex width="40%" flexDir="column">
+            <Flex width="40%" height="100%" flexDir="column">
               <Flex
                 flexDirection="column"
                 justifyContent="space-between"
                 width="100%"
-                height="100%"
+                height="60rem"
               >
-                {/* bussName */}
-                <Flex maxWidth="100%" flexDir="column">
+                {/* fullName */}
+                <Flex width="100%" flexDir="column">
                   <Text
                     color="#fff"
                     flexShrink="0"
@@ -160,14 +206,14 @@ const getPlaces=(val)=>setPlaces(val)
                         : "22px"
                     }
                   >
-                    Business name
+                    Full Name
                   </Text>
                   <Input
-                    mt={["0.1rem", "0.3rem", "0.5rem"]}
-                    value={bussName}
+                    mt={["0.5rem", "0.7rem", "0.7rem"]}
+                    value={fullName}
                     onChange={(e) =>
                       dispatch({
-                        type: "business name",
+                        type: "full name",
                         payload: e.target.value,
                       })
                     }
@@ -188,7 +234,7 @@ const getPlaces=(val)=>setPlaces(val)
                         ? "18px"
                         : "22px"
                     }
-                    maxWidth="100%"
+                    width="100%"
                     height={
                       isSmallerThan740
                         ? "2.5rem"
@@ -204,8 +250,8 @@ const getPlaces=(val)=>setPlaces(val)
                 </Flex>
                 {/* end bussName */}
 
-                {/* bussType */}
-                <Flex maxWidth="100%" flexDir="column" mt="0.5rem">
+                {/* personal email */}
+                <Flex width="100%" flexDir="column" mt="0.5rem">
                   <Text
                     color="#fff"
                     flexShrink="0"
@@ -225,15 +271,14 @@ const getPlaces=(val)=>setPlaces(val)
                         : "22px"
                     }
                   >
-                    Business type
+                    Email
                   </Text>
                   <Input
-                    isReadOnly
-                    mt={["0.1rem", "0.3rem", "0.5rem"]}
-                    placeholder="Logistics"
-                    value="Education"
+                    mt={["0.5rem", "0.7rem", "0.7rem"]}
+                    placeholder="Enter your email"
+                    value={email}
                     onChange={(e) =>
-                      dispatch({ type: "Buss Type", payload: e.target.value })
+                      dispatch({ type: "email", payload: e.target.value })
                     }
                     color="#fff"
                     fontWeight="450"
@@ -251,7 +296,7 @@ const getPlaces=(val)=>setPlaces(val)
                         ? "18px"
                         : "22px"
                     }
-                    maxWidth="100%"
+                    width="100%"
                     height={
                       isSmallerThan740
                         ? "2.5rem"
@@ -265,10 +310,10 @@ const getPlaces=(val)=>setPlaces(val)
                     }}
                   />
                 </Flex>
-                {/* end bussType */}
+                {/* end email */}
 
-                {/* bussEmail */}
-                <Flex maxWidth="100%" flexDir="column" mt="0.5rem">
+                {/* company name */}
+                <Flex width="100%" flexDir="column" mt="0.5rem">
                   <Text
                     color="#fff"
                     flexShrink="0"
@@ -288,14 +333,14 @@ const getPlaces=(val)=>setPlaces(val)
                         : "22px"
                     }
                   >
-                    Business Email
+                    Company Name
                   </Text>
                   <Input
-                    mt={["0.1rem", "0.3rem", "0.5rem"]}
+                    mt={["0.5rem", "0.7rem", "0.7rem"]}
                     placeholder="enter email"
-                    value={bussEmail}
+                    value={company_name}
                     onChange={(e) =>
-                      dispatch({ type: "Buss Email", payload: e.target.value })
+                      dispatch({ type: "comp name", payload: e.target.value })
                     }
                     color="#fff"
                     fontWeight="450"
@@ -313,7 +358,7 @@ const getPlaces=(val)=>setPlaces(val)
                         ? "18px"
                         : "22px"
                     }
-                    maxWidth="100%"
+                    width="100%"
                     height={
                       isSmallerThan740
                         ? "2.5rem"
@@ -327,10 +372,10 @@ const getPlaces=(val)=>setPlaces(val)
                     }}
                   />
                 </Flex>
-                {/* end bussEmail */}
+                {/* end company name */}
 
-                {/* bussAddress */}
-                <Flex maxWidth="100%" flexDir="column" mt="0.5rem">
+                {/* company num */}
+                <Flex width="100%" flexDir="column" mt="0.5rem">
                   <Text
                     color="#fff"
                     flexShrink="0"
@@ -350,40 +395,20 @@ const getPlaces=(val)=>setPlaces(val)
                         : "22px"
                     }
                   >
-                    Business Address
+                    Company PhoneNumber
                   </Text>
-                  <AutoLocation
-                    lg="3.5rem"
-                    padding="0px 12px"
-                    bRadius="4px"
-                    lineLg="22px"
-                    lineMd="18px"
-                    lineSm="15px"
-                    color="#fff"
-                    fntW="450"
-                    fntLg="15px"
-                    fntMd="13px"
-                    fntSm="10px"
-                    mtLg="0.5"
-                    mtMd="0.3rem"
-                    mtSm="0.1rem"
-                    pholder="text.100"
-                    bg="rgba(6, 0, 137, 0.05)"
-                    plHolderText="Enter address"
-                    focusBorder="primary.main"
-                    getPlaces={getPlaces}
-                  />
-                  {/* <Input
-                    mt={["0.1rem", "0.3rem", "0.5rem"]}
+
+                  <Input
+                    mt={["0.5rem", "0.7rem", "0.7rem"]}
                     placeholder="Enter an Address"
-                    value={bussAdd}
+                    value={company_phone_num}
                     onChange={(e) =>
                       dispatch({
-                        type: "Buss Address",
+                        type: "comp number",
                         payload: e.target.value,
                       })
                     }
-                    color="#fff" 
+                    color="#fff"
                     fontWeight="450"
                     fontSize={
                       isSmallerThan740
@@ -399,7 +424,7 @@ const getPlaces=(val)=>setPlaces(val)
                         ? "18px"
                         : "22px"
                     }
-                    maxWidth="100%"
+                    width="100%"
                     height={
                       isSmallerThan740
                         ? "2.5rem"
@@ -411,12 +436,145 @@ const getPlaces=(val)=>setPlaces(val)
                     _placeholder={{
                       color: "text.100",
                     }}
-                  /> */}
+                  />
                 </Flex>
-                {/* end bussAddress */}
+                {/* end  */}
 
-                {/* state */}
-                <Flex maxWidth="100%" flexDir="column" mt="0.5rem">
+                {/* comp email */}
+
+                <Flex width="100%" flexDir="column" mt="0.5rem">
+                  <Text
+                    color="#fff"
+                    flexShrink="0"
+                    fontWeight="500"
+                    fontSize={
+                      isSmallerThan740
+                        ? "10px"
+                        : isSmallerThan1024
+                        ? "13px"
+                        : "18px"
+                    }
+                    lineHeight={
+                      isSmallerThan740
+                        ? "15px"
+                        : isSmallerThan1024
+                        ? "18px"
+                        : "22px"
+                    }
+                  >
+                    Company email
+                  </Text>
+
+                  <Input
+                    mt={["0.5rem", "0.7rem", "0.7rem"]}
+                    placeholder="Enter an Address"
+                    value={company_email}
+                    onChange={(e) =>
+                      dispatch({
+                        type: "comp email",
+                        payload: e.target.value,
+                      })
+                    }
+                    color="#fff"
+                    fontWeight="450"
+                    fontSize={
+                      isSmallerThan740
+                        ? "10px"
+                        : isSmallerThan1024
+                        ? "13px"
+                        : "15px"
+                    }
+                    lineHeight={
+                      isSmallerThan740
+                        ? "15px"
+                        : isSmallerThan1024
+                        ? "18px"
+                        : "22px"
+                    }
+                    width="100%"
+                    height={
+                      isSmallerThan740
+                        ? "2.5rem"
+                        : isSmallerThan1024
+                        ? "2.5rem"
+                        : "3rem"
+                    }
+                    background="rgba(6, 0, 137, 0.05)"
+                    _placeholder={{
+                      color: "text.100",
+                    }}
+                  />
+                </Flex>
+
+                {/* end email */}
+
+                {/* company address */}
+                <Flex width="100%" flexDir="column" mt="0.5rem">
+                  <Text
+                    color="#fff"
+                    flexShrink="0"
+                    fontWeight="500"
+                    fontSize={
+                      isSmallerThan740
+                        ? "10px"
+                        : isSmallerThan1024
+                        ? "13px"
+                        : "18px"
+                    }
+                    lineHeight={
+                      isSmallerThan740
+                        ? "15px"
+                        : isSmallerThan1024
+                        ? "18px"
+                        : "22px"
+                    }
+                  >
+                    Company Address
+                  </Text>
+
+                  <Input
+                    mt={["0.5rem", "0.7rem", "0.7rem"]}
+                    placeholder="Enter an Address"
+                    value={company_address}
+                    onChange={(e) =>
+                      dispatch({
+                        type: "comp address",
+                        payload: e.target.value,
+                      })
+                    }
+                    color="#fff"
+                    fontWeight="450"
+                    fontSize={
+                      isSmallerThan740
+                        ? "10px"
+                        : isSmallerThan1024
+                        ? "13px"
+                        : "15px"
+                    }
+                    lineHeight={
+                      isSmallerThan740
+                        ? "15px"
+                        : isSmallerThan1024
+                        ? "18px"
+                        : "22px"
+                    }
+                    width="100%"
+                    height={
+                      isSmallerThan740
+                        ? "2.5rem"
+                        : isSmallerThan1024
+                        ? "2.5rem"
+                        : "3rem"
+                    }
+                    background="rgba(6, 0, 137, 0.05)"
+                    _placeholder={{
+                      color: "text.100",
+                    }}
+                  />
+                </Flex>
+                {/* end company addr */}
+                {/* country */}
+                <Flex width="100%" flexDir="column" mt="0.5rem">
                   <Text
                     color="#fff"
                     flexShrink="0"
@@ -490,87 +648,21 @@ const getPlaces=(val)=>setPlaces(val)
                 {/* password */}
                 <Flex
                   maxWidth="100%"
-                  height="7.5rem"
+                  height="8.5rem"
                   flexDir="column"
                   mt="0.5rem"
                 >
-                  <Text
-                    color="#fff"
-                    flexShrink="0"
-                    fontWeight="500"
-                    fontSize={
-                      isSmallerThan740
-                        ? "10px"
-                        : isSmallerThan1024
-                        ? "13px"
-                        : "18px"
-                    }
-                    lineHeight={
-                      isSmallerThan740
-                        ? "15px"
-                        : isSmallerThan1024
-                        ? "18px"
-                        : "22px"
-                    }
-                  >
-                    Create password
-                  </Text>
-                  <Input
-                    type="password"
-                    mt={["0.1rem", "0.3rem", "0.5rem"]}
-                    value={password}
-                    onChange={(e) =>
-                      dispatch({ type: "password", payload: e.target.value })
-                    }
-                    placeholder="******"
-                    color="#fff"
-                    fontWeight="450"
-                    fontSize={
-                      isSmallerThan740
-                        ? "10px"
-                        : isSmallerThan1024
-                        ? "13px"
-                        : "15px"
-                    }
-                    lineHeight={
-                      isSmallerThan740
-                        ? "15px"
-                        : isSmallerThan1024
-                        ? "18px"
-                        : "22px"
-                    }
-                    maxWidth="100%"
-                    height={
-                      isSmallerThan740
-                        ? "2.5rem"
-                        : isSmallerThan1024
-                        ? ""
-                        : "3rem"
-                    }
-                    background="rgba(6, 0, 137, 0.05)"
-                    _placeholder={{
-                      color: "text.100",
-                    }}
-                  />
-                  <Flex mt="1.4375rem" height="1rem">
-                    <Box
-                      borderRadius="50%"
-                      width="16px"
-                      height="16px"
-                      background="#F47C25"
-                    ></Box>
+                  <Flex flexDir="column" width="100%" height="4.875rem">
                     <Text
-                      alignSelf="center"
-                      ml="9px"
                       color="#fff"
                       flexShrink="0"
-                      fontWeight="300"
+                      fontWeight="500"
                       fontSize={
                         isSmallerThan740
                           ? "10px"
                           : isSmallerThan1024
                           ? "13px"
-                          : "12px"
+                          : "18px"
                       }
                       lineHeight={
                         isSmallerThan740
@@ -580,7 +672,96 @@ const getPlaces=(val)=>setPlaces(val)
                           : "22px"
                       }
                     >
-                      Password should be at least 8 character long
+                      Create password
+                    </Text>
+                    <Input
+                      type="password"
+                      mt={["0.5rem", "0.7rem", "0.7rem"]}
+                      value={password}
+                      onChange={(e) =>
+                        dispatch({ type: "password", payload: e.target.value })
+                      }
+                      placeholder="******"
+                      color="#fff"
+                      fontWeight="450"
+                      fontSize={
+                        isSmallerThan740
+                          ? "10px"
+                          : isSmallerThan1024
+                          ? "13px"
+                          : "15px"
+                      }
+                      lineHeight={
+                        isSmallerThan740
+                          ? "15px"
+                          : isSmallerThan1024
+                          ? "18px"
+                          : "22px"
+                      }
+                      maxWidth="100%"
+                      height={
+                        isSmallerThan740
+                          ? "2.5rem"
+                          : isSmallerThan1024
+                          ? "2.5rem"
+                          : "3rem"
+                      }
+                      background="rgba(6, 0, 137, 0.05)"
+                      _placeholder={{
+                        color: "text.100",
+                      }}
+                    />
+                  </Flex>
+                  <Flex
+                    mt={["0.3rem", "0.6rem", "1rem"]}
+                    width={
+                      !password
+                        ? "16.1875rem"
+                        : password.length >= 8
+                        ? "6rem"
+                        : "15rem"
+                    }
+                    height="1.375rem"
+                    justifyContent="space-between"
+                  >
+                    <Image
+                      src={
+                        !password
+                          ? empty
+                          : password.length >= 8
+                          ? correct
+                          : error
+                      }
+                      alt="Sendrail"
+                      width="16px"
+                      height="16px"
+                      objectFit="cover"
+                      alignSelf="center"
+                    />
+                    <Text
+                      color="#fff"
+                      flexShrink="0"
+                      fontWeight="300"
+                      fontSize={
+                        isSmallerThan900
+                          ? "10px"
+                          : isSmallerThan1024
+                          ? "13px"
+                          : "12px"
+                      }
+                      lineHeight={
+                        isSmallerThan900
+                          ? "15px"
+                          : isSmallerThan1024
+                          ? "18px"
+                          : "22px"
+                      }
+                    >
+                      {!password
+                        ? "Password should be at least 8 character long"
+                        : password.length >= 8
+                        ? "Valid Password"
+                        : "Invalid password,at least 8 character long"}
                     </Text>
                   </Flex>
                 </Flex>
@@ -637,7 +818,7 @@ const getPlaces=(val)=>setPlaces(val)
                   isSmallerThan740 ? "" : isSmallerThan1024 ? "" : "36.75rem"
                 }
                 height="2.75rem"
-                mt="1rem"
+                mt={["0.3rem", "0.6rem", "1rem"]}
               >
                 <Text
                   color="#fff"

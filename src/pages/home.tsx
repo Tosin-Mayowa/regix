@@ -1,15 +1,24 @@
-import { Flex, Image,Text,Button } from '@chakra-ui/react'
+import { Flex, Image, Text, Button, useMediaQuery } from "@chakra-ui/react";
 import React from 'react';
 import Logo from "../Assets/logo.png";
 import Homebg from "../Assets/Home.png";
 import { useNavigate } from "react-router-dom";
 const Home=()=>{
  const navigate = useNavigate();
+  const [isSmallerThan900] = useMediaQuery("(max-width: 900px)");
+  const [isSmallerThan740] = useMediaQuery("(max-width: 740px)");
+  const [isSmallerThan1024] = useMediaQuery("(max-width: 1024px)");
+  const [isSmallerThan530] = useMediaQuery("(max-width: 530px)");
     return (
       <>
         <Flex flexDir="column" width="100vw" height="100%" background="#15616D">
           {/* header */}
-          <Flex width="100%" height="100px" px="3rem">
+          <Flex
+            width="100%"
+            height="100px"
+            px="3rem"
+            justifyContent="space-between"
+          >
             <Image
               src={Logo}
               alt="logo"
@@ -17,6 +26,24 @@ const Home=()=>{
               width="100px"
               height="100px"
             />
+
+            <Button
+              alignSelf="center"
+              fontWeight="700"
+              fontSize={
+                isSmallerThan900 ? "12px" : isSmallerThan1024 ? "15px" : "18px"
+              }
+              lineHeight={
+                isSmallerThan900 ? "15px" : isSmallerThan1024 ? "18px" : "22px"
+              }
+              color="primary.main"
+              onClick={() => navigate("/login")}
+              _hover={{
+                textDecoration: "none",
+              }}
+            >
+              Sign in
+            </Button>
           </Flex>
           {/* end header */}
           <Flex justifyContent="space-between" height="calc(100vh-100px)">
