@@ -173,8 +173,8 @@ console.log({
               src={Logo}
               alt="logo"
               objectFit="cover"
-              width="100px"
-              height="100px"
+              width={["50px","70px","100px"]}
+              height={["50px","70px","100px"]}
             />
             <Button
               alignSelf="center"
@@ -215,7 +215,7 @@ console.log({
               width="50%"
               height="100%"
               display={
-                isSmallerThan740 ? "none" : isSmallerThan1024 ? "none" : "flex"
+                 ["none" ,"none", "flex"]
               }
             >
               <Image
