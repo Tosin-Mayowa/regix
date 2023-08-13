@@ -138,10 +138,10 @@ const Home=()=>{
               borderRadius="4px"
               padding={["0.5rem 1rem", "1rem 1.5rem", "1rem 2rem"]}
               fontWeight="500"
-              fontSize={["12px", "15px", "18px"]}
+              fontSize={["13px", "15px", "18px"]}
               lineHeight={["15px", "18px", "22px"]}
-              width="50%"
-              height={["2.5rem", "2.5rem", "3rem"]}
+              width={["70%","50%","50%"]}
+              height={["2rem", "2.5rem", "3rem"]}
               background="#F47C25"
               _hover={{
                 background: "#F47C25",
