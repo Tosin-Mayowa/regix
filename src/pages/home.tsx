@@ -36,28 +36,40 @@ const Home=()=>{
               width="100px"
               height="100px"
             />
-            {           state==='Developer'? <Button
-              variant="link"
-              alignSelf="center"
-              fontWeight="700"
-              fontSize={
-                isSmallerThan900 ? "12px" : isSmallerThan1024 ? "15px" : "18px"
-              }
-              lineHeight={
-                isSmallerThan900 ? "15px" : isSmallerThan1024 ? "18px" : "22px"
-              }
-              color="#fff"
-              onClick={() => navigate("/developer")}
-              _hover={{
-                textDecoration: "none",
-                color: "#fff",
-              }}
-            >
-              Dashboard
-            </Button>:''}
+            {state === "Developer" ? (
+              <Button
+                variant="link"
+                alignSelf="center"
+                fontWeight="700"
+                fontSize={
+                  isSmallerThan900
+                    ? "12px"
+                    : isSmallerThan1024
+                    ? "15px"
+                    : "18px"
+                }
+                lineHeight={
+                  isSmallerThan900
+                    ? "15px"
+                    : isSmallerThan1024
+                    ? "18px"
+                    : "22px"
+                }
+                color="#fff"
+                onClick={() => navigate("/developer")}
+                _hover={{
+                  textDecoration: "none",
+                  color: "#fff",
+                }}
+              >
+                Dashboard
+              </Button>
+            ) : (
+              ""
+            )}
           </Flex>
 
-       <Button
+          <Button
             alignSelf="center"
             fontWeight="700"
             fontSize={
@@ -72,11 +84,15 @@ const Home=()=>{
               textDecoration: "none",
             }}
           >
-           Developer
+            Developer
           </Button>
         </Flex>
         {/* end header */}
-        <Flex justifyContent="space-between" height="calc(100vh-100px)">
+        <Flex
+          flexDir={["column", "row"]}
+          justifyContent="space-between"
+          height="calc(100vh-100px)"
+        >
           <Flex
             alignSelf="center"
             flexDir="column"
@@ -94,10 +110,14 @@ const Home=()=>{
               >
                 Regix
               </Text> */}
-            <Flex background="#F47C25" width="150px" height="5px"></Flex>
+            <Flex
+              background="#F47C25"
+              width={["80px", "130px", "150px"]}
+              height="5px"
+            ></Flex>
             <Text
-              fontSize="20px"
-              lineHeight="22px"
+              fontSize={["12px", "15px", "20px"]}
+              lineHeight={["15px", "18px", "22px"]}
               fontWeight="500px"
               letterSpacing="1px"
               color="white"
@@ -116,12 +136,12 @@ const Home=()=>{
             <Button
               color="#fff"
               borderRadius="4px"
-              padding="1rem 2rem"
+              padding={["0.5rem 1rem", "1rem 1.5rem", "1rem 2rem"]}
               fontWeight="500"
-              fontSize="18px"
-              lineHeight="22px"
+              fontSize={["12px", "15px", "18px"]}
+              lineHeight={["15px", "18px", "22px"]}
               width="50%"
-              height="3rem"
+              height={["1rem", "2rem", "3rem"]}
               background="#F47C25"
               _hover={{
                 background: "#F47C25",
