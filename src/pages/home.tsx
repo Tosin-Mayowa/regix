@@ -97,7 +97,7 @@ const Home=()=>{
             alignSelf="center"
             flexDir="column"
             width="100%"
-            height="550px"
+            height={["700px","550px","550px"]}
             flexWrap="wrap"
             padding="2rem"
             justifyContent="space-between"
@@ -141,7 +141,7 @@ const Home=()=>{
               fontSize={["12px", "15px", "18px"]}
               lineHeight={["15px", "18px", "22px"]}
               width="50%"
-              height={["1rem", "2rem", "3rem"]}
+              height={["2.5rem", "2.5rem", "3rem"]}
               background="#F47C25"
               _hover={{
                 background: "#F47C25",
@@ -151,15 +151,15 @@ const Home=()=>{
               Register
             </Button>
           </Flex>
-          <Flex width="50%" height="100%">
+          <Flex display={["none","flex","flex"]} width="50%" height="100%">
             <Image
               alignSelf="flex-start"
               justifySelf="center"
               src={Homebg}
               alt="homebg"
               objectFit="cover"
-              width="800px"
-              height="700px"
+              width={["500px","800px"]}
+              height={["400px","700px"]}
             />
           </Flex>
         </Flex>
