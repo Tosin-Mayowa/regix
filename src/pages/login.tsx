@@ -139,10 +139,10 @@ useEffect(() => {
               flexShrink="0"
               fontWeight="700"
               fontSize={
-                isSmallerThan740 ? "12px" : isSmallerThan1024 ? "18px" : "24px"
+                isSmallerThan740 ? "15px" : isSmallerThan1024 ? "18px" : "24px"
               }
               lineHeight={
-                isSmallerThan740 ? "15px" : isSmallerThan1024 ? "18px" : "22px"
+                isSmallerThan740 ? "18px" : isSmallerThan1024 ? "18px" : "22px"
               }
             >
               {user.company_name}
