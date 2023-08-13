@@ -33,8 +33,8 @@ const Home=()=>{
               src={Logo}
               alt="logo"
               objectFit="cover"
-              width="100px"
-              height="100px"
+              width={["50px", "70px", "100px"]}
+              height={["50px", "70px", "100px"]}
             />
             {state === "Developer" ? (
               <Button
@@ -96,7 +96,7 @@ const Home=()=>{
           <Flex
             alignSelf="center"
             flexDir="column"
-            width="59%"
+            width="100%"
             height="550px"
             flexWrap="wrap"
             padding="2rem"

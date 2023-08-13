@@ -230,7 +230,7 @@ console.log({
               />
             </Flex>
             {/* form wrapper */}
-            <Flex width={["80%", "60%", "40%"]} height="100%" flexDir="column">
+            <Flex width={["100%", "90%", "40%"]} height="100%" flexDir="column">
               <Flex
                 flexDirection="column"
                 justifyContent="space-between"
@@ -809,6 +809,7 @@ console.log({
                     </InputGroup>
                   </Flex>
                   <Flex
+                  flexDir={["column","row","row"]}
                     mt={["0.3rem", "0.6rem", "1rem"]}
                     width={
                       !password
