@@ -166,15 +166,16 @@ console.log({
           <Flex
             width="100%"
             height="100px"
-            px={["6.5rem", "5.5rem", "4.5rem"]}
+            px={["2.5rem", "5.5rem", "4.5rem"]}
             justifyContent="space-between"
           >
             <Image
               src={Logo}
               alt="logo"
+              alignSelf={["center", "", ""]}
               objectFit="cover"
-              width={["50px","70px","100px"]}
-              height={["50px","70px","100px"]}
+              width={["50px", "70px", "100px"]}
+              height={["50px", "70px", "100px"]}
             />
             <Button
               alignSelf="center"
@@ -211,13 +212,7 @@ console.log({
                 : "space-between"
             }
           >
-            <Flex
-              width="50%"
-              height="100%"
-              display={
-                 ["none" ,"none", "flex"]
-              }
-            >
+            <Flex width="50%" height="100%" display={["none", "none", "flex"]}>
               <Image
                 alignSelf="flex-start"
                 justifySelf="center"
@@ -235,7 +230,7 @@ console.log({
               />
             </Flex>
             {/* form wrapper */}
-            <Flex width="40%" height="100%" flexDir="column">
+            <Flex width={["80%", "60%", "40%"]} height="100%" flexDir="column">
               <Flex
                 flexDirection="column"
                 justifyContent="space-between"
@@ -817,10 +812,10 @@ console.log({
                     mt={["0.3rem", "0.6rem", "1rem"]}
                     width={
                       !password
-                        ? "16.1875rem"
+                        ? ["7rem", "10rem", "16.1875rem"]
                         : password.length >= 8
-                        ? "6rem"
-                        : "15rem"
+                        ? ["4rem", "4rem", "6rem"]
+                        : ["10rem","13rem","15rem"]
                     }
                     height="1.375rem"
                     justifyContent="space-between"
@@ -834,8 +829,8 @@ console.log({
                           : error
                       }
                       alt="Sendrail"
-                      width="16px"
-                      height="16px"
+                      width={["13px", "16px"]}
+                      height={["13px", "16px"]}
                       objectFit="cover"
                       alignSelf="center"
                     />
@@ -915,7 +910,7 @@ console.log({
               <Flex
                 flexWrap="wrap"
                 maxWidth={
-                  isSmallerThan740 ? "" : isSmallerThan1024 ? "" : "36.75rem"
+                  isSmallerThan740 ? "100%" : isSmallerThan1024 ? "100%" : "36.75rem"
                 }
                 height="2.75rem"
                 mt={["0.3rem", "0.6rem", "1rem"]}
