@@ -97,7 +97,7 @@ const Home=()=>{
             alignSelf="center"
             flexDir="column"
             width="100%"
-            height={["700px","550px","550px"]}
+            height="550px"
             flexWrap="wrap"
             padding="2rem"
             justifyContent="space-between"
