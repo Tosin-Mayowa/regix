@@ -833,7 +833,7 @@ console.log({
                       width={["13px", "16px"]}
                       height={["13px", "16px"]}
                       objectFit="cover"
-                      alignSelf="center"
+                      alignSelf={["flex-start","center","center"]}
                     />
                     <Text
                       color="#fff"
