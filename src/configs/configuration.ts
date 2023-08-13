@@ -13,7 +13,7 @@ export const refreshRequestInstance = axios.create({
   baseURL: process.env.REACT_APP_API_URL,
 });
 const requestClient = axios.create({
-  baseURL: process.env.REACT_APP_API_URL,
+  baseURL: 'http://localhost:5000',
   timeout: 30000,
   headers: {
     Accept: "application/json",

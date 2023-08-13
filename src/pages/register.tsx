@@ -3,8 +3,8 @@ import reducer from '../reducers/registerReducer';
 import { Link } from "react-router-dom";
 import '../Style/style.css'
 import {
-  Flex,
-  Box,
+  Flex,InputGroup,
+  InputRightElement,
   Image,
   Button,
   Text,
@@ -21,24 +21,27 @@ import empty from "../Assets/signUp/default.png";
 import Logo from "../Assets/logo.png";
 import office from "../Assets/office.png";
 import Select from 'react-select'
+import eyeImg from "../Assets/signUp/eye.png";
+import eyeImgCross from "../Assets/signUp/Vector.png";
 import { useNavigate } from 'react-router-dom';
 // import reducer from '../reducers/signupReducer'
 
 
 import { getCountries, getStates } from 'country-state-picker';
 import { AutoLocation } from '../Components/AutoLocation';
+import { Role } from '../lib/utilities';
+import { signUpApi } from '../api/signUp';
 const initialState = {
-  
-  bussAdd: '',
-  stateVal: '',
-  country: '',
-  phn: '',
-  bussName: '',
-  bussType: '',
-  bussEmail: '',
-
-  password: ''
-}
+  fullName:'',
+  stateVal:'',
+  country:'',
+  email:'',
+  company_name:'',
+  company_phone_num:'',
+  company_email:'',
+  company_address:'',
+  password:'',
+};
 
 
 const Register=()=>{
@@ -49,17 +52,16 @@ const Register=()=>{
  const [isSmallerThan530] = useMediaQuery("(max-width: 530px)");
  const [stateOptions, setStateptions] = useState([]);
   const [places, setPlaces] = useState({});
+  const [isClicked, setIsClicked] = useState<boolean>(false)
  const navigate = useNavigate();
  const [state, dispatch] = useReducer(reducer, initialState);
- const [isLoading, setIsLoading] = useState(false);
+ const [isLoading, setIsLoading] = useState<boolean>(false);
  const options = getCountries().map(({ name, code }) => ({
    value: code,
    label: name,
+  color:'#fff'
  }));
- const genderOptions = [
-   { value: "M", label: "Male" },
-   { value: "F", label: "Female" },
- ];
+
 const getPlaces=(val)=>setPlaces(val)
  const colorStyles = {
    control: (styles, { isFocused }) => {
@@ -76,6 +78,12 @@ const getPlaces=(val)=>setPlaces(val)
      };
    },
    
+  //  singleValueLabel:(styles,{data})=>{
+  //    return {...styles,color:data.color}
+  //  },
+  //  multiValueLabel:(styles,{data})=>{
+  //    return {...styles,color:data.color};
+  //  }
  };
 
  // const passReg=/(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%]).{8,24}$/;
@@ -96,6 +104,55 @@ const getPlaces=(val)=>setPlaces(val)
 company_address,
     password
   } = state;
+
+console.log({
+  fullName,
+  stateVal,
+  country,
+  email,
+  company_name,
+  company_phone_num,
+  company_email,
+  company_address,
+  password,
+});
+
+
+  const sendSignUp = useCallback(async () => {
+    setIsLoading(true);
+    const config = {
+      fullName,
+      email,
+      role: Role.DEVELOPER,
+      company_name,
+      company_phone_num,
+      company_email,
+      company_address,
+      state: stateVal.label,
+      country:country.label,
+      password,
+      isActive: false,
+    };
+
+    const resp = await signUpApi(config);
+    setIsLoading(false);
+    console.log({ signup: resp });
+
+    if (resp) {
+      navigate("/login", { state: { email } });
+    }
+  }, [
+    fullName,
+    email,
+    company_name,
+    company_phone_num,
+    company_email,
+    company_address,
+    state,
+    country,
+    password,
+    
+  ]);
 
     return (
       <>
@@ -183,7 +240,7 @@ company_address,
                 flexDirection="column"
                 justifyContent="space-between"
                 width="100%"
-                height="60rem"
+                height={["48rem", "58rem", "60rem"]}
               >
                 {/* fullName */}
                 <Flex width="100%" flexDir="column">
@@ -333,7 +390,7 @@ company_address,
                         : "22px"
                     }
                   >
-                    Company Name
+                    School Name
                   </Text>
                   <Input
                     mt={["0.5rem", "0.7rem", "0.7rem"]}
@@ -395,7 +452,7 @@ company_address,
                         : "22px"
                     }
                   >
-                    Company PhoneNumber
+                    School PhoneNumber
                   </Text>
 
                   <Input
@@ -462,7 +519,7 @@ company_address,
                         : "22px"
                     }
                   >
-                    Company email
+                    School email
                   </Text>
 
                   <Input
@@ -529,7 +586,7 @@ company_address,
                         : "22px"
                     }
                   >
-                    Company Address
+                    School Address
                   </Text>
 
                   <Input
@@ -604,9 +661,23 @@ company_address,
                       const states = getStates(country.value).map((state) => ({
                         value: state,
                         label: state,
+                        color: "#fff",
                       }));
                       setStateptions(states);
                     }}
+                    theme={(theme) => ({
+                      ...theme,
+                      // borderRadius: 0,
+                      colors: {
+                        ...theme.colors,
+                        text: "#3599B8",
+                        font: "#3599B8",
+                        primary25: "#3599B8",
+                        primary: "#3599B8",
+                        neutral80: "white",
+                        color: "black",
+                      },
+                    })}
                     styles={colorStyles}
                   />
                 </Flex>
@@ -641,6 +712,19 @@ company_address,
                     onChange={(stateVal) =>
                       dispatch({ type: "state val", payload: stateVal })
                     }
+                    theme={(theme) => ({
+                      ...theme,
+                      // borderRadius: 0,
+                      colors: {
+                        ...theme.colors,
+                        text: "#3599B8",
+                        font: "#3599B8",
+                        primary25: "#3599B8",
+                        primary: "#3599B8",
+                        neutral80: "white",
+                        color: "black",
+                      },
+                    })}
                     styles={colorStyles}
                   />
                 </Flex>
@@ -674,43 +758,60 @@ company_address,
                     >
                       Create password
                     </Text>
-                    <Input
-                      type="password"
-                      mt={["0.5rem", "0.7rem", "0.7rem"]}
-                      value={password}
-                      onChange={(e) =>
-                        dispatch({ type: "password", payload: e.target.value })
-                      }
-                      placeholder="******"
-                      color="#fff"
-                      fontWeight="450"
-                      fontSize={
-                        isSmallerThan740
-                          ? "10px"
-                          : isSmallerThan1024
-                          ? "13px"
-                          : "15px"
-                      }
-                      lineHeight={
-                        isSmallerThan740
-                          ? "15px"
-                          : isSmallerThan1024
-                          ? "18px"
-                          : "22px"
-                      }
-                      maxWidth="100%"
-                      height={
-                        isSmallerThan740
-                          ? "2.5rem"
-                          : isSmallerThan1024
-                          ? "2.5rem"
-                          : "3rem"
-                      }
-                      background="rgba(6, 0, 137, 0.05)"
-                      _placeholder={{
-                        color: "text.100",
-                      }}
-                    />
+                    <InputGroup>
+                      <Input
+                        type={isClicked ? "text" : "password"}
+                        mt={["0.5rem", "0.7rem", "0.7rem"]}
+                        value={password}
+                        onChange={(e) =>
+                          dispatch({
+                            type: "password",
+                            payload: e.target.value,
+                          })
+                        }
+                        placeholder="******"
+                        color="#fff"
+                        fontWeight="450"
+                        fontSize={
+                          isSmallerThan740
+                            ? "10px"
+                            : isSmallerThan1024
+                            ? "13px"
+                            : "15px"
+                        }
+                        lineHeight={
+                          isSmallerThan740
+                            ? "15px"
+                            : isSmallerThan1024
+                            ? "18px"
+                            : "22px"
+                        }
+                        maxWidth="100%"
+                        height={
+                          isSmallerThan740
+                            ? "2.5rem"
+                            : isSmallerThan1024
+                            ? "2.5rem"
+                            : "3rem"
+                        }
+                        background="rgba(6, 0, 137, 0.05)"
+                        _placeholder={{
+                          color: "text.100",
+                        }}
+                      />
+                      <InputRightElement
+                        mt="15.5px"
+                        children={
+                          <Image
+                            src={isClicked ? eyeImg : eyeImgCross}
+                            width="24px"
+                            height="24px"
+                            objectFit="contain"
+                            onClick={() => setIsClicked(!isClicked)}
+                          />
+                        }
+                      />
+                    </InputGroup>
                   </Flex>
                   <Flex
                     mt={["0.3rem", "0.6rem", "1rem"]}
@@ -802,10 +903,9 @@ company_address,
                 loadingText="Loading"
                 spinnerPlacement="start"
                 variant={isLoading ? "outline" : "filled"}
-                //   onClick={() => {
-                //     sendSignUp();
-                //     reset();
-                //   }}
+                onClick={() => {
+                  sendSignUp();
+                }}
                 _hover={{
                   background: "#F47C25",
                 }}
