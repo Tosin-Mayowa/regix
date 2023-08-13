@@ -28,7 +28,7 @@ import { useNavigate } from 'react-router-dom';
 
 
 import { getCountries, getStates } from 'country-state-picker';
-import { AutoLocation } from '../Components/AutoLocation';
+// import { AutoLocation } from '../Components/AutoLocation';
 import { Role } from '../lib/utilities';
 import { signUpApi } from '../api/signUp';
 const initialState = {
@@ -51,7 +51,7 @@ const Register=()=>{
  const [isSmallerThan1024] = useMediaQuery("(max-width: 1024px)");
  const [isSmallerThan530] = useMediaQuery("(max-width: 530px)");
  const [stateOptions, setStateptions] = useState([]);
-  const [places, setPlaces] = useState({});
+  // const [places, setPlaces] = useState({});
   const [isClicked, setIsClicked] = useState<boolean>(false)
  const navigate = useNavigate();
  const [state, dispatch] = useReducer(reducer, initialState);
@@ -62,7 +62,7 @@ const Register=()=>{
   color:'#fff'
  }));
 
-const getPlaces=(val)=>setPlaces(val)
+// const getPlaces=(val)=>setPlaces(val)
  const colorStyles = {
    control: (styles, { isFocused }) => {
      return {
@@ -123,7 +123,7 @@ console.log({
     const config = {
       fullName,
       email,
-      role: Role.DEVELOPER,
+      role: Role.ADMIN,
       company_name,
       company_phone_num,
       company_email,

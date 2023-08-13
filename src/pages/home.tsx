@@ -9,9 +9,9 @@ const Home=()=>{
   const [isSmallerThan740] = useMediaQuery("(max-width: 740px)");
   const [isSmallerThan1024] = useMediaQuery("(max-width: 1024px)");
   const [isSmallerThan530] = useMediaQuery("(max-width: 530px)");
-   const location=useLocation();
-   const role=location?.state?.role;
+   const {state}=useLocation();
   
+  console.log(state)
   
   return (
     <>
@@ -23,7 +23,12 @@ const Home=()=>{
           px="3rem"
           justifyContent="space-between"
         >
-          <Flex width="30%" height="100%"  px={['3px','5px','20px']} justifyContent="space-between">
+          <Flex
+            width="30%"
+            height="100%"
+            px={["3px", "5px", "20px"]}
+            justifyContent="space-between"
+          >
             <Image
               src={Logo}
               alt="logo"
@@ -31,7 +36,7 @@ const Home=()=>{
               width="100px"
               height="100px"
             />
-{           role==='Developer'? <Button
+            {           state==='Developer'? <Button
               variant="link"
               alignSelf="center"
               fontWeight="700"
@@ -52,7 +57,7 @@ const Home=()=>{
             </Button>:''}
           </Flex>
 
-          <Button
+       <Button
             alignSelf="center"
             fontWeight="700"
             fontSize={
@@ -67,7 +72,7 @@ const Home=()=>{
               textDecoration: "none",
             }}
           >
-            Sign in
+           Developer
           </Button>
         </Flex>
         {/* end header */}

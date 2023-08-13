@@ -9,7 +9,11 @@ import {
   Text,
   Input,
   useMediaQuery,
+  InputRightElement,
+  InputGroup,
 } from "@chakra-ui/react";
+import eyeImg from "../Assets/signUp/eye.png";
+import eyeImgCross from "../Assets/signUp/Vector.png";
 import { signInApi } from "../api/login";
 import { useAuth } from "../lib/hooks/useAuth";
 import { getUserByEmail } from "../api/getUser";
@@ -33,6 +37,7 @@ const [isSmallerThan740] = useMediaQuery("(max-width: 740px)");
 const [isSmallerThan1024] = useMediaQuery("(max-width: 1024px)");
 const [isSmallerThan530] = useMediaQuery("(max-width: 530px)");
 const navigate = useNavigate();
+ const [isClicked, setIsClicked] = useState<boolean>(false);
 const [user,setUser]=useState<User>({
   company_address:'',
 company_email:'',
@@ -48,7 +53,7 @@ const [password, setPassword] = useState("");
 const [isLoading, setIsLoading] = useState(false);
 
 const location=useLocation()
-const emails=location.state.email;
+const emails = location?.state?.email ?? "toss800@gmail.com";
 
 const getSingleUser=useCallback(async ()=>{
 const res=await getUserByEmail(emails);
@@ -214,23 +219,41 @@ useEffect(() => {
               >
                 Password
               </Text>
-              <Input
-                mt="0.5rem"
-                placeholder="Password"
-                type="password"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-                width="100%"
-                height="2.6rem"
-                background="rgba(6, 0, 137, 0.05)"
-                border="1px solid #ABA7A7"
-                borderRadius="4px"
-                fontWeight="500"
-                fontSize="16px"
-                lineHeight="22px"
-                color="#1F1F1F"
-                focusBorderColor="primary.main"
-              />
+              <InputGroup>
+                <Input
+                  mt="0.5rem"
+                  placeholder="Password"
+                  type={isClicked ? "text" : "password"}
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                  width="100%"
+                  height="2.6rem"
+                  background="rgba(6, 0, 137, 0.05)"
+                  border="1px solid #ABA7A7"
+                  borderRadius="4px"
+                  fontWeight="500"
+                  fontSize="16px"
+                  lineHeight="22px"
+                  color="#1F1F1F"
+                  focusBorderColor="primary.main"
+                />
+                {user.role !== "Developer" ? (
+                  <InputRightElement
+                    mt="10.5px"
+                    children={
+                      <Image
+                        src={isClicked ? eyeImg : eyeImgCross}
+                        width="24px"
+                        height="24px"
+                        objectFit="contain"
+                        onClick={() => setIsClicked(!isClicked)}
+                      />
+                    }
+                  />
+                ) : (
+                  ""
+                )}
+              </InputGroup>
             </Flex>
             <Button
               alignSelf="center"
@@ -245,7 +268,7 @@ useEffect(() => {
               spinnerPlacement="start"
               borderRadius="4px"
               fontWeight="500"
-                onClick={() => login()}
+              onClick={() => login()}
               fontSize="18px"
               lineHeight="22px"
               color="#fff"
@@ -259,11 +282,10 @@ useEffect(() => {
             </Button>
             <Flex
               alignSelf="center"
-              mt={['1rem','2rem',"2rem"]}
+              mt={["1rem", "2rem", "2rem"]}
               width={["15rem", "28rem", "30rem"]}
-              justifyContent={["","space-between","space-between"]}
+              justifyContent={["", "space-between", "space-between"]}
               flexDir={["column", "row", "row"]}
-              
             >
               <Text
                 cursor="pointer"
