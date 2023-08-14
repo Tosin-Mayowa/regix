@@ -795,7 +795,7 @@ console.log({
                         }}
                       />
                       <InputRightElement
-                        mt="15.5px"
+                        mt={["10.5px","15.5px"]}
                         children={
                           <Image
                             src={isClicked ? eyeImg : eyeImgCross}

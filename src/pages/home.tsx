@@ -24,6 +24,7 @@ const Home=()=>{
           justifyContent="space-between"
         >
           <Flex
+          alignSelf="center"
             width="30%"
             height="100%"
             px={["3px", "5px", "20px"]}
