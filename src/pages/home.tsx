@@ -15,7 +15,7 @@ const Home=()=>{
   
   return (
     <>
-      <Flex flexDir="column" width="100vw" height="100vh" background="#15616D" py={["10px","",""]}>
+      <Flex flexDir="column" width="100vw" height="100%" background="#15616D" py={["10px","","2rem"]}>
         {/* header */}
         <Flex
           width="100%"
@@ -96,7 +96,7 @@ const Home=()=>{
           <Flex
             alignSelf="center"
             flexDir="column"
-            width="100%"
+            width="50%"
             height="500px"
             flexWrap="wrap"
             padding="2rem"
