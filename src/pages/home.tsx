@@ -15,7 +15,7 @@ const Home=()=>{
   
   return (
     <>
-      <Flex flexDir="column" width="100vw" height="100%" background="#15616D" py={["10px","","2rem"]}>
+      <Flex flexDir="column" width="100vw" height="100%" background="#15616D" py={["10px","",""]}>
         {/* header */}
         <Flex
           width="100%"
