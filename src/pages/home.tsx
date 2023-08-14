@@ -15,7 +15,13 @@ const Home=()=>{
   
   return (
     <>
-      <Flex flexDir="column" width="100vw" height="100%" background="#15616D" py={["10px","",""]}>
+      <Flex
+        flexDir="column"
+        width="100vw"
+        height="100%"
+        background="#15616D"
+        py={["10px", "", ""]}
+      >
         {/* header */}
         <Flex
           width="100%"
@@ -24,15 +30,17 @@ const Home=()=>{
           justifyContent="space-between"
         >
           <Flex
-          alignSelf="center"
+            alignSelf="center"
             width="30%"
             height="100%"
             px={["3px", "5px", "20px"]}
             justifyContent="space-between"
+            alignItems={["center","flex-start"]}
           >
             <Image
               src={Logo}
               alt="logo"
+              
               objectFit="cover"
               width={["50px", "70px", "100px"]}
               height={["50px", "70px", "100px"]}
@@ -97,7 +105,7 @@ const Home=()=>{
           <Flex
             alignSelf="center"
             flexDir="column"
-            width={["100%","50%"]}
+            width={["100%", "50%"]}
             height="500px"
             flexWrap="wrap"
             padding="2rem"
@@ -141,7 +149,7 @@ const Home=()=>{
               fontWeight="500"
               fontSize={["13px", "15px", "18px"]}
               lineHeight={["15px", "18px", "22px"]}
-              width={["70%","50%","50%"]}
+              width={["70%", "50%", "50%"]}
               height={["2rem", "2.5rem", "3rem"]}
               background="#F47C25"
               _hover={{
@@ -152,15 +160,15 @@ const Home=()=>{
               Register
             </Button>
           </Flex>
-          <Flex display={["none","flex","flex"]} width="50%" height="100%">
+          <Flex display={["none", "flex", "flex"]} width="50%" height="100%">
             <Image
               alignSelf="flex-start"
               justifySelf="center"
               src={Homebg}
               alt="homebg"
               objectFit="cover"
-              width={["500px","800px"]}
-              height={["400px","700px"]}
+              width={["500px", "800px"]}
+              height={["400px", "700px"]}
             />
           </Flex>
         </Flex>
