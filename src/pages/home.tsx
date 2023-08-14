@@ -96,7 +96,7 @@ const Home=()=>{
           <Flex
             alignSelf="center"
             flexDir="column"
-            width="50%"
+            width={["100%","50%"]}
             height="500px"
             flexWrap="wrap"
             padding="2rem"
